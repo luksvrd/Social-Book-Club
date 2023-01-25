@@ -1,9 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Project extends Model {}
 
-Project.init(
+class Bookshelf extends Model {}
+
+Bookshelf.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,26 +12,31 @@ Project.init(
       primaryKey: true,
       autoIncrement: true,
     },
+
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isbn: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    pages: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    needed_funding: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    user_id: {
+    reader_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
+        model: 'reader',
         key: 'id',
       },
     },
