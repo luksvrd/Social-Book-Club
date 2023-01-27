@@ -1,17 +1,19 @@
 [
   {
-    "name": "Sal",
-    "email": "sal@hotmail.com",
-    "password": "password1234"
+    "id": 1,
+    "user_id": 1,
+    "books": [
+      "The Hitchhiker's Guide to the Galaxy",
+      "The Restaurant at the End of the Universe",
+      "Life, the Universe and Everything",
+      "So Long, and Thanks for All the Fish",
+      "Mostly Harmless",
+      "And Another Thing..."
+    ]
   },
   {
-    "name": "Lernantino",
-    "email": "lernantino@gmail.com",
-    "password": "coolPw2020"
-  },
-  {
-    "name": "Amiko",
-    "email": "amiko2k20@aol.com",
-    "password": "amiko2k20!"
+    "id": 2,
+    "user_id": 2,
+    "books": ["The Hobbit", "The Lord of the Rings", "The Silmarillion"]
   }
 ]
