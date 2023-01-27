@@ -1,7 +1,7 @@
-const User = require("./User");
-const Bookshelf = require("./Bookshelf");
-const ReaderList = require("./ReaderList");
-const Book = require("./Book");
+import Book from "./Book";
+import Bookshelf from "./Bookshelf";
+import ReaderList from "./ReaderList";
+import User from "./User";
 
 Book.hasMany(User, {
   foreignKey: "book_id",
@@ -49,4 +49,4 @@ Comment.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
-module.exports = { User, Bookshelf, ReaderList, Book };
+export default { User, Bookshelf, ReaderList, Book };

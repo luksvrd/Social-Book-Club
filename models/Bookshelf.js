@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../config/connection";
 
 class Bookshelf extends Model {}
 
@@ -34,8 +34,8 @@ Bookshelf.init(
     reader_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'reader',
-        key: 'id',
+        model: "reader",
+        key: "id",
       },
     },
   },
@@ -44,8 +44,8 @@ Bookshelf.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'project',
+    modelName: "project",
   }
 );
 
-module.exports = Project;
+export default Bookshelf;
