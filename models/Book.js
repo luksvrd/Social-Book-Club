@@ -15,6 +15,11 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
     isbn: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,6 +28,7 @@ Book.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,6 +36,7 @@ Book.init(
     reader_id: {
       type: DataTypes.INTEGER,
       references: {
+
         model: "reader",
         key: "id",
       },
@@ -38,12 +45,19 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+        model: 'reader',
+        key: 'id',
+      },
+    },
+
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
+
     modelName: "book",
   }
 );
