@@ -1,8 +1,14 @@
-const router = require('express').Router();
-const userRoutes = require('./userRoutes');
-const projectRoutes = require('./projectRoutes');
+import express from "express";
+import bookshelfRoutes from "./bookshelf-routes";
+import commentRoutes from "./comment-routes";
+import userRoutes from "./user-routes";
 
-router.use('/users', userRoutes);
-router.use('/projects', projectRoutes);
 
-module.exports = router;
+const router = express.Router();
+
+router.use("/users", userRoutes);
+router.use("/comments", commentRoutes);
+router.use("/bookshelves", bookshelfRoutes);
+
+export default router;
+
