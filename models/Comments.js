@@ -1,9 +1,9 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/connection";
 
-class Bookshelf extends Model {}
+class Comment extends Model {}
 
-Bookshelf.init(
+Comment.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,41 +11,35 @@ Bookshelf.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    comment_text: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [1],
+      },
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isbn: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    pages: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    reader_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "reader",
+        model: "user",
+        key: "id",
+      },
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "post",
         key: "id",
       },
     },
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "project",
+    modelName: "comment",
   }
 );
 
-export default Bookshelf;
+export default Comment;

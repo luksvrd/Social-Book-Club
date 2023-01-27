@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../config/connection";
 
 class Book extends Model {}
 
@@ -19,6 +19,7 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     isbn: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,29 +28,38 @@ Book.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    edition: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1
-    },
-    is_paperback: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     reader_id: {
       type: DataTypes.INTEGER,
       references: {
+
+        model: "reader",
+        key: "id",
+      },
+    },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
         model: 'reader',
         key: 'id',
       },
     },
+
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'book'
+
+    modelName: "book",
   }
 );
 
-module.exports = Book;
+export default Book;

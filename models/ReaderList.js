@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../config/connection";
 
 class ReaderList extends Model {}
 
@@ -30,8 +30,8 @@ ReaderList.init(
     reader_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'reader',
-        key: 'id',
+        model: "reader",
+        key: "id",
       },
     },
   },
@@ -40,10 +40,8 @@ ReaderList.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'reader_list',
+    modelName: "reader_list",
   }
 );
 
-module.exports = ReaderList;
-
-
+export default ReaderList;
