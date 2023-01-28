@@ -49,4 +49,4 @@ Comment.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
-module.exports { User, Bookshelf, ReaderList, Book };
+module.exports = { Book, Bookshelf, ReaderList, User };
