@@ -1,8 +1,6 @@
-import { Router } from 'express';
-import { Bookshelf, User } from '../../models';
-import withAuth from '../../utils/auth';
-
 const router = Router();
+const withAuth = require('../../utils/auth');
+const { Bookshelf, User } = require('../../models');
 
 router.post('/', withAuth, async (req, res) => {
   try {
@@ -59,4 +57,4 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

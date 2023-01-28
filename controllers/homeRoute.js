@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { Bookshelf, User, Comment } from '../models';
+const { Bookshelf, User, Comment } = require('../models');
+const router = require('express').Router();
 
 router.get('/', async (req, res) => {
   try {

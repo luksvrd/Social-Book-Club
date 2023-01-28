@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/connection";
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class ReaderList extends Model {}
 
@@ -44,4 +44,4 @@ ReaderList.init(
   }
 );
 
-export default ReaderList;
+module.exports = ReaderList;
