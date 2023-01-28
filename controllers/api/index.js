@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const userRoutes = require("./user-routes");
-const commentRoutes = require("./comment-routes");
-const bookshelfRoutes = require("./bookshelf-routes");
+const userRoutes = require("./user-route");
+const commentRoutes = require("./comment-route");
+const bookshelfRoutes = require("./bookshelf-route");
 
 router.use("/users", userRoutes);
 router.use("/comments", commentRoutes);
