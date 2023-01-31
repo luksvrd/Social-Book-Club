@@ -1,9 +1,7 @@
 const Book = require("./Book");
 const Bookshelf = require("./Bookshelf");
-const ReaderList = require("./ReaderList");
+// const ReaderList = require("./ReaderList");
 const User = require("./User");
-const Comment = require("./Comments");
-
 
 Book.hasMany(User, {
   foreignKey: "book_id",
@@ -61,4 +59,4 @@ User.hasMany(Comment, {
   onDelete: "CASCADE",
 });
 
-module.exports = { Book, Bookshelf, ReaderList, User, Comment };
+module.exports = { Book, Bookshelf, User, Comment };
