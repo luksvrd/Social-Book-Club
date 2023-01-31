@@ -4,16 +4,16 @@ const { User } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const newUser = await User.create({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
-      req.session.user_id = newUser.id;
-      req.session.username = newUser.username;
+      req.session.id = newUser.id;
+      req.session.email = newUser.email;
       req.session.loggedIn = true;
 
-      res.status(200).json(newUser);
+      res.json(newUser);
     });
   } catch (err) {
     // a 500 error is a server error
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ where: { username: req.body.username } });
+    const user = await User.findOne({ where: { email: req.body.email } });
 
     if (!user) {
       res
@@ -47,8 +47,8 @@ router.post("/login", async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.id = user.id;
+      req.session.email = user.email;
       req.session.loggedIn = true;
 
       res.json({ user, message: "You are now logged in!" });
