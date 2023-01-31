@@ -2,6 +2,7 @@ const Book = require("./Book");
 const Bookshelf = require("./Bookshelf");
 const ReaderList = require("./ReaderList");
 const User = require("./User");
+const Comment = require("./Comments");
 
 
 Book.hasMany(User, {
@@ -60,4 +61,4 @@ User.hasMany(Comment, {
   onDelete: "CASCADE",
 });
 
-module.exports = { Book, Bookshelf, ReaderList, User };
+module.exports = { Book, Bookshelf, ReaderList, User, Comment };
