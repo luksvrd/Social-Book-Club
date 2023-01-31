@@ -60,5 +60,4 @@ User.hasMany(Comment, {
   onDelete: "CASCADE",
 });
 
-// removed Readerlist
 module.exports = { Book, Bookshelf, User, Comment };
