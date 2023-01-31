@@ -2,6 +2,7 @@ import Book from "./Book";
 import Bookshelf from "./Bookshelf";
 import ReaderList from "./ReaderList";
 import User from "./User";
+import Comment from "./Comment";
 
 Book.hasMany(User, {
   foreignKey: "book_id",
@@ -34,17 +35,27 @@ Bookshelf.hasMany(Book, {
   onDelete: "CASCADE",
 });
 
-ReaderList.belongsTo(User, {
+// ReaderList.belongsTo(User, {
+//   foreignKey: "user_id",
+//   onDelete: "CASCADE",
+// });
+
+// ReaderList.hasMany(Book, {
+//   foreignKey: "book_id",
+//   onDelete: "CASCADE",
+// });
+
+Comment.belongsTo(User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
-ReaderList.hasMany(Book, {
+Comment.belongsTo(Book, {
   foreignKey: "book_id",
   onDelete: "CASCADE",
 });
 
-Comment.belongsTo(User, {
+User.hasMany(Comment, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
