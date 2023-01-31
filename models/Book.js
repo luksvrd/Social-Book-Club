@@ -19,33 +19,18 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     isbn: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    pages: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    name: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    reader_id: {
-      type: DataTypes.INTEGER,
-      references: {
-
-        model: "reader",
-        key: "id",
-      },
-    },
-    author: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
   },
   {
     sequelize,
@@ -58,3 +43,4 @@ Book.init(
 );
 
 module.exports = Book;
+

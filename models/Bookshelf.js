@@ -11,30 +11,13 @@ Bookshelf.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    bookshelf_content: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isbn: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    pages: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    reader_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "reader",
+        model: "user",
         key: "id",
       },
     },
@@ -44,7 +27,7 @@ Bookshelf.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "project",
+    modelName: "bookshelf",
   }
 );
 

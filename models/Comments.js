@@ -23,15 +23,15 @@ Comment.init(
       references: {
         model: "user",
         key: "id",
-      },
+      }
     },
-    post_id: {
+    book_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "post",
+        model: "book",
         key: "id",
-      },
-    },
+      }
+    }
   },
   {
     sequelize,
