@@ -1,14 +1,11 @@
-import express from "express";
-import bookshelfRoutes from "./bookshelf-routes";
-import commentRoutes from "./comment-routes";
-import userRoutes from "./user-routes";
-
-
-const router = express.Router();
+const router = require("express").Router();
+const userRoutes = require("./user-route");
+const commentRoutes = require("./comment-route");
+const bookshelfRoutes = require("./bookshelf-route");
 
 router.use("/users", userRoutes);
 router.use("/comments", commentRoutes);
 router.use("/bookshelves", bookshelfRoutes);
 
-export default router;
+module.exports = router;
 
