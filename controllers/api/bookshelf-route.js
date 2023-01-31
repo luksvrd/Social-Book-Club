@@ -1,8 +1,8 @@
-const router = Router();
-const withAuth = require('../../utils/auth');
-const { Bookshelf, User } = require('../../models');
+const router = require("express").Router();
+const withAuth = require("../../utils/auth");
+const { Bookshelf, User } = require("../../models");
 
-router.post('/', withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
     const newBookshelf = await Bookshelf.create({
       ...req.body,
@@ -15,29 +15,29 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/user/bookshelf/:id', async (req, res) => {
+router.get("/user/bookshelf/:id", async (req, res) => {
   try {
     const bookshelfData = await Bookshelf.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ["name"],
         },
       ],
     });
 
     const bookshelf = bookshelfData.get({ plain: true });
 
-    res.render('bookshelf', {
+    res.render("bookshelf", {
       ...bookshelf,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const bookshelfData = await Bookshelf.destroy({
       where: {
@@ -46,12 +46,12 @@ router.delete('/:id', withAuth, async (req, res) => {
       },
     });
 
-    if (!bookshlefData) {
-      res.status(404).json({ message: 'No bookshelf found with this id!' });
+    if (!bookshelfData) {
+      res.status(404).json({ message: "No bookshelf found with this id!" });
       return;
     }
 
-    res.status(200).json(projectData);
+    res.status(200).json(bookshelfData);
   } catch (err) {
     res.status(500).json(err);
   }
