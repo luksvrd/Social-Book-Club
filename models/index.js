@@ -3,6 +3,7 @@ const Bookshelf = require("./Bookshelf");
 const ReaderList = require("./ReaderList");
 const User = require("./User");
 
+
 Book.hasMany(User, {
   foreignKey: "book_id",
   onDelete: "CASCADE",
@@ -34,17 +35,27 @@ Bookshelf.hasMany(Book, {
   onDelete: "CASCADE",
 });
 
-ReaderList.belongsTo(User, {
+// ReaderList.belongsTo(User, {
+//   foreignKey: "user_id",
+//   onDelete: "CASCADE",
+// });
+
+// ReaderList.hasMany(Book, {
+//   foreignKey: "book_id",
+//   onDelete: "CASCADE",
+// });
+
+Comment.belongsTo(User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
-ReaderList.hasMany(Book, {
+Comment.belongsTo(Book, {
   foreignKey: "book_id",
   onDelete: "CASCADE",
 });
 
-Comment.belongsTo(User, {
+User.hasMany(Comment, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });

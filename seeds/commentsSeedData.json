@@ -1,46 +1,14 @@
 [
   {
     "id": 1,
-    "isbn": "978-3-16-148410-0",
-    "comments": [
-      {
-        "id": 1,
-        "text": "This is a comment",
-        "user": {
-          "id": 1,
-          "name": "John Doe"
-        }
-      },
-      {
-        "id": 2,
-        "text": "This is another comment",
-        "user": {
-          "id": 2,
-          "name": "Jane Doe"
-        }
-      }
-    ]
+    "comment_text": "This is a comment",
+    "user_id": 1,
+    "book_id": 1
   },
   {
     "id": 2,
-    "isbn": "978-3-16-148410-1",
-    "comments": [
-      {
-        "id": 3,
-        "text": "This is a comment",
-        "user": {
-          "id": 1,
-          "name": "John Doe"
-        }
-      },
-      {
-        "id": 4,
-        "text": "This is another comment",
-        "user": {
-          "id": 2,
-          "name": "Jane Doe"
-        }
-      }
-    ]
+    "comment_text": "This is another comment",
+    "user_id": 1,
+    "book_id": 2
   }
 ]
