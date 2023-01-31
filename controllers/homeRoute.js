@@ -58,10 +58,12 @@ router.get("/", async (req, res) => {
 router.get("/profile", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findAll(where: {
-      user_id: req.session.user_id,
-      attributes: { exclude: ["password"] },
-      include: [{ model: Bookshelf }],
+    const userData = await User.findAll({
+      where: {
+        user_id: req.session.user_id,
+        attributes: { exclude: ["password"] },
+        include: [{ model: Bookshelf }],
+      },
     });
 
     if (userData) {

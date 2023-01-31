@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     node: true,
   },
-  extends: ["standard", "prettier"],
+  extends: ["prettier"],
   overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
