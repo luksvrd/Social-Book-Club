@@ -22,7 +22,6 @@ document
     if (title && author) {
       url += `title=${title}` + `&author=${author}`;
     }
-    console.log(url);
 
     // fetch request to openlibrary.org
     const response = await fetch(url);
