@@ -46,7 +46,7 @@ router.delete("/:id", withAuth, async (req, res) => {
       },
     });
 
-    if (!bookshelfData) {
+    if (!bookshlefData) {
       res.status(404).json({ message: "No bookshelf found with this id!" });
       return;
     }

@@ -8,7 +8,9 @@ router.get("/", async (req, res) => {
     const bookshelfData = await Bookshelf.findAll({
       include: [
         {
+          // model is the name of the model we're including in the query.
           model: User,
+          // attributes is an array of the attributes we want to include in the query.
           attributes: ["name"],
         },
       ],
@@ -29,21 +31,49 @@ router.get("/", async (req, res) => {
   }
 });
 
+// router.get("/list/:id", async (req, res) => {
+//   try {
+//     const listData = await list.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: User,
+//           attributes: ["name"],
+//         },
+//       ],
+//     });
+
+//     if (listData) {
+//       const list = listData.get({ plain: true });
+
+//       res.render("list", { list });
+//     } else {
+//       res.status(404).end();
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 // Use withAuth middleware to prevent access to route
 router.get("/profile", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
+    const userData = await User.findAll(where: {
+      user_id: req.session.user_id,
       attributes: { exclude: ["password"] },
       include: [{ model: Bookshelf }],
     });
 
-    const user = userData.get({ plain: true });
+    if (userData) {
+      const user = userData.get({ plain: true });
 
-    res.render("profile", {
-      ...user,
-      logged_in: true,
-    });
+      res.render("profile", {
+        ...user,
+        logged_in: true,
+      });
+    } else {
+      res.status(404).end();
+    }
   } catch (err) {
     res.status(500).json(err);
   }
