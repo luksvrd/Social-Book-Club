@@ -4,29 +4,6 @@
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Search New Book:</h3>
-    {{! Add other book search fields }}
-    <form class="form new-book-form">
-      <div class="form-group">
-        <label for="book-name">Title:</label>
-        <input class="form-input" type="text" id="book-name" name="book-name" />
-      </div>
-      <div class="form-group">
-        <label for="book-id">Search By ISBN:</label>
-        <input class="form-input" type="number" id="book-id" name="book-id" />
-      </div>
-      <div class="form-group">
-        <label for="author">Author:</label>
-        <textarea class="form-input" id="author" name="author"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Find</button>
-      </div>
-    </form>
-  </div>
-
   {{#if readerList.length}}
     <div class="col-md-6 book-list">
       <h3>Current Books:</h3>

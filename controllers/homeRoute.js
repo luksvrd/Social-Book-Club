@@ -92,4 +92,10 @@
 //   res.render("signup");
 // });
 
-// module.exports = router;
+// route to get the search page
+router.get("/search", (req, res) => {
+  res.render("search");
+});
+
+module.exports = router;
+
