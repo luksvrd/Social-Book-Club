@@ -1,0 +1,14 @@
+  <div class="col-md-6">
+    <h3>Results:</h3>
+    <div id="results"></div>
+    {{#each searchResults}}
+    <div class="card" id="book-card">
+      <div class="card-body">
+        <h5 class="card-title" id="book-title"></h5>
+        <img src="https://covers.openlibrary.org/b/isbn/"+{{isbn}}"-S.jpg" />
+        <h6 class="card-subtitle mb-2 text-muted" id="book-author"></h6>
+        <p class="card-text" id="isbn">{{isbn}}</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
