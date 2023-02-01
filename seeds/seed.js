@@ -1,41 +1,62 @@
+const seedUsers = require("./userData.json");
+const seedBooks = require("./bookSeedData.json");
+const seedBookshelves = require("./bookshelvesSeedData.json");
+const seedComments = require("./commentsSeedData.json");
+
 const sequelize = require("../config/connection");
-const { User, Bookshelf, Book, Comment } = require("../models");
 
-const userData = require("./userData.json");
-const booksData = require("./bookSeedData.json");
-const bookshelfData = require("./bookshelvesSeedData.json");
-const commentData = require("./commentsSeedData.json");
-
-const seedDatabase = async () => {
+const seedAllDatabase = async () => {
   await sequelize.sync({ force: true });
+  console.log("\n----- DATABASE SYNCED -----\n");
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
+  // this is where i am getting the error in the terminal: "TypeError: seedUsers is not a function"
+  await seedUsers();
+  console.log("\n----- USERS SEEDED -----\n");
 
-  for (const book of booksData) {
-    await Book.create({
-      ...book,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  await seedBooks();
+  console.log("\n----- BOOKS SEEDED -----\n");
 
-  for (const bookshelf of bookshelfData) {
-    await Bookshelf.create({
-      ...bookshelf,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  await seedBookshelves();
+  console.log("\n----- BOOKSHELVES SEEDED -----\n");
 
-  for (const comment of commentData) {
-    await Comment.create({
-      ...comment,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  await seedComments();
+  console.log("\n----- COMMENTS SEEDED -----\n");
 
   process.exit(0);
 };
 
-seedDatabase();
+seedAllDatabase();
+
+// const seedDatabase = async () => {
+//   await sequelize.sync({ force: true });
+
+//   const users = await User.bulkCreate(userData, {
+//     individualHooks: true,
+//     returning: true,
+//   });
+
+// for (const book of booksData) {
+//   await Book.create({
+//     ...book,
+//     user_id: users[Math.floor(Math.random() * users.length)].id,
+//   });
+// }
+
+// for (const bookshelf of bookshelfData) {
+//   await Bookshelf.create({
+//     ...bookshelf,
+//     user_id: users[Math.floor(Math.random() * users.length)].id,
+//   });
+// }
+
+// for (const comment of commentData) {
+//   await Comment.create({
+//     ...comment,
+//     user_id: users[Math.floor(Math.random() * users.length)].id,
+//   });
+// }
+
+//   process.exit(0);
+// };
+
+// seedDatabase();

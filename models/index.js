@@ -4,58 +4,38 @@ const Bookshelf = require("./Bookshelf");
 const User = require("./User");
 const Comment = require("./Comments");
 
-Book.hasMany(User, {
-  foreignKey: "book_id",
-  onDelete: "CASCADE",
-});
-
-User.belongsToMany(Book, {
-  through: {
-    model: Bookshelf,
-    unique: false,
-  },
-  as: "bookshelf_books",
-});
-
-Book.belongsToMany(User, {
-  through: {
-    model: Bookshelf,
-    unique: false,
-  },
-  as: "bookshelf_users",
-});
-
+// Bookshelf belongs to User
 Bookshelf.belongsTo(User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
+// Bookshelf has many Books
 Bookshelf.hasMany(Book, {
   foreignKey: "book_id",
   onDelete: "CASCADE",
 });
 
-// ReaderList.belongsTo(User, {
-//   foreignKey: "user_id",
-//   onDelete: "CASCADE",
-// });
+// Book belongs to Bookshelf
+Book.belongsTo(Bookshelf, {
+  foreignKey: "bookshelf_id",
+  onDelete: "CASCADE",
+});
 
-// ReaderList.hasMany(Book, {
-//   foreignKey: "book_id",
-//   onDelete: "CASCADE",
-// });
-
-Comment.belongsTo(User, {
+// User has many Bookshelves
+User.hasMany(Bookshelf, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
-Comment.belongsTo(Book, {
-  foreignKey: "book_id",
+// User has many Comments
+User.hasMany(Comment, {
+  foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
-User.hasMany(Comment, {
+// Comment belongs to User
+Comment.belongsTo(User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
