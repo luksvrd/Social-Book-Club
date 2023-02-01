@@ -11,7 +11,7 @@ Bookshelf.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    books: {
+    bookshelf_content: {
       type: DataTypes.STRING,
     },
     user_id: {

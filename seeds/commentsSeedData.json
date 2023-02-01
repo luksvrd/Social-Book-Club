@@ -1,1 +1,14 @@
-
+[
+  {
+    "id": 1,
+    "comment_text": "This is a comment",
+    "user_id": 1,
+    "book_id": 1
+  },
+  {
+    "id": 2,
+    "comment_text": "This is another comment",
+    "user_id": 1,
+    "book_id": 2
+  }
+]
