@@ -31,29 +31,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// router.get("/list/:id", async (req, res) => {
-//   try {
-//     const listData = await list.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["name"],
-//         },
-//       ],
-//     });
-
-//     if (listData) {
-//       const list = listData.get({ plain: true });
-
-//       res.render("list", { list });
-//     } else {
-//       res.status(404).end();
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 // Use withAuth middleware to prevent access to route
 router.get("/profile", withAuth, async (req, res) => {
   try {
@@ -105,11 +82,6 @@ router.get("/signup", (req, res) => {
 // route to get the search page
 router.get("/search", (req, res) => {
   res.render("search");
-});
-
-// route to get the search results page
-router.get("/search-results", (req, res) => {
-  res.render("results");
 });
 
 module.exports = router;
