@@ -25,7 +25,7 @@ const signupFormHandler = async (event) => {
     }
   }
 };
-
+// This selects the entire form element and adds an event listener to it.
 document
-  .querySelector("#signup-btn")
+  .querySelector("#signup-form")
   .addEventListener("submit", signupFormHandler);

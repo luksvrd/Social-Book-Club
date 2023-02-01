@@ -2,18 +2,11 @@
   {
     "id": 1,
     "user_id": 1,
-    "books": [
-      "The Hitchhiker's Guide to the Galaxy",
-      "The Restaurant at the End of the Universe",
-      "Life, the Universe and Everything",
-      "So Long, and Thanks for All the Fish",
-      "Mostly Harmless",
-      "And Another Thing..."
-    ]
+    "bookshelf_content": "The Hitchhiker's Guide to the Galaxy"
   },
   {
     "id": 2,
     "user_id": 2,
-    "books": ["The Hobbit", "The Lord of the Rings", "The Silmarillion"]
+    "bookshelf_content": "The Hobbit"
   }
 ]
