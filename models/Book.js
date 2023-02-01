@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Book extends Model {}
 
@@ -27,7 +27,7 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image: {
+    cover: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -43,4 +43,3 @@ Book.init(
 );
 
 module.exports = Book;
-
