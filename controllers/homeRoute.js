@@ -107,4 +107,9 @@ router.get("/search", (req, res) => {
   res.render("search");
 });
 
+// route to get the search results page
+router.get("/search-results", (req, res) => {
+  res.render("results");
+});
+
 module.exports = router;
