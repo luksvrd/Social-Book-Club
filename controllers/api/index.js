@@ -5,6 +5,6 @@ const bookshelfRoutes = require("./bookshelf-route.js");
 
 router.use("/users", userRoutes);
 router.use("/comments", commentRoutes);
-router.use("/bookshelves", bookshelfRoutes);
+router.use("/bookshelf", bookshelfRoutes);
 
 module.exports = router;
