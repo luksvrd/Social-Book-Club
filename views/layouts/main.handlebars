@@ -6,7 +6,10 @@
     <title>Over-Booked</title>
     {{! <link rel="stylesheet" href="/css/jass.css" /> }}
     <link rel="shortcut icon" href="#" />
+    <title>Over Booked</title>
+    {{!-- <link rel="stylesheet" href="/css/jass.css" /> --}}
     <link rel="text/css" href="/public/css/dist/output.css" />
+    <link rel="shortcut icon" href="#">
   </head>
 
   <body>
@@ -20,6 +23,7 @@
 
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
+
             <a href="/profile">profile</a>
             <svg
               fill="none"
@@ -39,8 +43,9 @@
             <a href="/dashboard">dashboard</a>
             |
             <a href="/search">Search for Books!</a>
+            <a href="/profile">Profile</a>
             |
-            <button class="no-button" id="logout">logout</button>
+            <a href="#" id="logout-link">logout</a>
           {{else}}
             <a href="/login">login</a>
           {{/if}}

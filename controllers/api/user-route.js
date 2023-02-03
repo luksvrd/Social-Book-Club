@@ -1,19 +1,22 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+// Add a route to create a new user
+// route: /api/users
 router.post("/", async (req, res) => {
   try {
     const newUser = await User.create({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
+      // this is the id of the user in the database
       req.session.user_id = newUser.id;
-      req.session.username = newUser.username;
+      req.session.email = newUser.email;
       req.session.loggedIn = true;
 
-      res.status(200).json(newUser);
+      res.json(newUser);
     });
   } catch (err) {
     // a 500 error is a server error
@@ -21,9 +24,11 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Add a route to log in a user
+// route: /api/users/login
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ where: { username: req.body.username } });
+    const user = await User.findOne({ where: { email: req.body.email } });
 
     if (!user) {
       res
@@ -48,7 +53,7 @@ router.post("/login", async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.email = user.email;
       req.session.loggedIn = true;
 
       res.json({ user, message: "You are now logged in!" });
@@ -62,6 +67,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Add a route to log out a user
+// route: /api/users/logout
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {

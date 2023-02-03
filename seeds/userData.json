@@ -16,5 +16,11 @@
     "name": "John Smith",
     "email": "johnSmith@test.com",
     "password": "password098"
+  },
+  {
+    "id": 4,
+    "name": "Jim",
+    "email": "jim@test.com",
+    "password": "123456"
   }
 ]
