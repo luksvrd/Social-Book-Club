@@ -8,7 +8,7 @@ router.post("/", withAuth, async (req, res) => {
   try {
     const newComment = await Comment.create({
       // Adding a comment requires the user's id, the book's id, and the comment's text
-      user_id: req.session.user_id,
+      id: req.session.user_id,
       book_id: req.body.book_id,
       comment_text: req.body.comment_text,
     });

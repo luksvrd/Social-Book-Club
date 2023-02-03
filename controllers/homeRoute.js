@@ -31,34 +31,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Add a route to get a single bookshelf
-router.get("/bookshelf/:id", async (req, res) => {
-  try {
-    const bookshelfData = await Bookshelf.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Books,
-          attributes: ["title", "author", "isbn", "pages", "cover"],
-        },
-      ],
-    });
-
-    const bookshelf = bookshelfData.get({ plain: true });
-
-    res.render("bookshelf", {
-      ...bookshelf,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // Add a route to get a single book
+// ********* not sure if this is correct ********* vvvvvvv
 router.get("/book/:id", async (req, res) => {
   try {
     const bookData = await Books.findByPk(req.params.id, {
@@ -140,7 +114,7 @@ router.get("/profile", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// ********* not sure if this is correct ********* ^^^^^
 // If a user is already logged in, redirect the request to another route. If not, render the login page
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {

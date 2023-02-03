@@ -6,17 +6,18 @@ const { User } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const newUser = await User.create({
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
       // this is the id of the user in the database
-      req.session.user_id = newUser.id;
+      req.session.id = newUser.id;
       req.session.email = newUser.email;
       req.session.loggedIn = true;
 
-      res.json(newUser);
+      res.status(200).json(newUser);
     });
   } catch (err) {
     // a 500 error is a server error
