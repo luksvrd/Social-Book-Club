@@ -29,16 +29,36 @@
 //   }
 // });
 
-// router.get("/list/:id", async (req, res) => {
-//   try {
-//     const listData = await list.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["name"],
-//         },
-//       ],
-//     });
+router.get("/list/:id", async (req, res) => {
+  try {
+    const listData = await list.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    const list = listData.get({ plain: true });
+
+    res.render("list", {
+      ...list,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Use withAuth middleware to prevent access to route
+router.get("/profile", withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Bookshelf }],
+    });
 
 //     const list = listData.get({ plain: true });
 
