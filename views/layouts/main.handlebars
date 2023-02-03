@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Over Booked</title>
+    <title>Over-Booked</title>
     <link rel="stylesheet" href="/css/jass.css" />
     <link rel="stylesheet" href="/dist/output.css" />
   </head>
@@ -13,13 +13,17 @@
       <header class="display-flex justify-space-between align-center p-2">
         <h1>
           <span role="img" aria-label="book">📚</span>
-          <a href="/">Welcome to Over Booked!</a>
+          <a href="/">Welcome to Over-Booked!</a>
         </h1>
         <nav>
-          <a href="/search">Search for Books!</a>
+
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
             <a href="/profile">profile</a>
+            |
+            <a href="/dashboard">dashboard</a>
+            |
+            <a href="/search">Search for Books!</a>
             |
             <button class="no-button" id="logout">logout</button>
           {{else}}
