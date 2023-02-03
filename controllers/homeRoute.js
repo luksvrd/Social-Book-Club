@@ -1,8 +1,10 @@
-const { Bookshelf, User, Comment } = require("../models");
+const { Bookshelf, User, Comment, Books } = require("../models");
 const router = require("express").Router();
 const withAuth = require("../utils/auth");
 
+// Get all bookshelves for homepage
 router.get("/", async (req, res) => {
+  console.log("hello");
   try {
     // Get all projects and JOIN with user data
     const bookshelfData = await Bookshelf.findAll({
@@ -29,21 +31,31 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/list/:id", async (req, res) => {
+// Add a route to get a single book
+// ********* not sure if this is correct ********* vvvvvvv
+router.get("/book/:id", async (req, res) => {
   try {
-    const listData = await list.findByPk(req.params.id, {
+    const bookData = await Books.findByPk(req.params.id, {
       include: [
         {
-          model: User,
-          attributes: ["name"],
+          model: Bookshelf,
+          attributes: ["title"],
+        },
+        {
+          model: Comment,
+          attributes: ["comment_text", "user_id", "book_id"],
+          include: {
+            model: User,
+            attributes: ["name"],
+          },
         },
       ],
     });
 
-    const list = listData.get({ plain: true });
+    const book = bookData.get({ plain: true });
 
-    res.render("list", {
-      ...list,
+    res.render("book", {
+      ...book,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -51,19 +63,23 @@ router.get("/list/:id", async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get("/profile", withAuth, async (req, res) => {
+// Add a route to get a single comment and render the edit-comment page
+router.get("/comment/:id", async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Bookshelf }],
+    const commentData = await Comment.findByPk(req.params.id, {
+      include: [
+        {
+          model: Books,
+          attributes: ["title"],
+        },
+        { model: User, attributes: ["name"] },
+      ],
     });
 
-    const list = listData.get({ plain: true });
+    const comment = commentData.get({ plain: true });
 
-    res.render("list", {
-      ...list,
+    res.render("edit-comment", {
+      ...comment,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -71,13 +87,21 @@ router.get("/profile", withAuth, async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// Add a route to get a single user and render the profile page with their bookshelves and books
 router.get("/profile", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
-      include: [{ model: Bookshelf }],
+      include: [
+        {
+          model: Bookshelf,
+          attributes: ["title"],
+          include: {
+            model: Books,
+            attributes: ["title", "author", "isbn", "pages", "cover"],
+          },
+        },
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -90,26 +114,15 @@ router.get("/profile", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// ********* not sure if this is correct ********* ^^^^^
+// If a user is already logged in, redirect the request to another route. If not, render the login page
 router.get("/login", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
-    res.redirect("/");
+    res.redirect("/profile");
     return;
   }
 
   res.render("login");
-});
-
-// signup
-router.get("/signup", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render("signup");
 });
 
 module.exports = router;
