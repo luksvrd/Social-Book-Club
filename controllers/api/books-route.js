@@ -36,7 +36,7 @@ router.post("/add", withAuth, async (req, res) => {
 
 // Add route to remove a book from the user's bookshelf
 // route: /api/books/remove
-router.delete("/remove", withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const bookData = await Book.destroy({
       where: {
