@@ -20,9 +20,9 @@
           <a href="/search">Search for Books!</a>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-            <a href="/profile">profile</a>
+            <a href="/profile">Profile</a>
             |
-            <button class="no-button" id="logout">logout</button>
+            <a href="#" id="logout-link">logout</a>
           {{else}}
             <a href="/login">login</a>
           {{/if}}
