@@ -1,4 +1,8 @@
-header,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* header,
 .book:not(:last-child) {
   border-bottom: 1px solid rgb(155, 154, 154);
 }
@@ -22,4 +26,4 @@ header,
   color: #056605;
   font-weight: bold;
   margin-left: -5px;
-}
+} */

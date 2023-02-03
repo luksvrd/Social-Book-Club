@@ -10,3 +10,4 @@ CREATE DATABASE books_db;
 
 -- DROP DATABASE IF EXISTS bookshelves_db;
 -- CREATE DATABASE bookshelves_db;
+
