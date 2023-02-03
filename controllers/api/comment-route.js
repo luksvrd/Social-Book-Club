@@ -2,6 +2,7 @@
 // const withAuth = require("../../utils/auth");
 // const { Comment } = require("../../models");
 
+
 // router.post("/", withAuth, async (req, res) => {
 //   try {
 //     const newComment = await Comment.create({
@@ -13,6 +14,7 @@
 //     res.status(500).json(err);
 //   }
 // });
+
 
 // router.delete("/:id", withAuth, async (req, res) => {
 //   try {
