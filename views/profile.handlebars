@@ -5,7 +5,8 @@
 </div>
 
   {{#if readerList.length}}
-    <div class="col-md-6 book-list">
+  {{!-- {{#if bookshelf.length}} since no readerlist ? --}}
+    <div class="col-md-6 book-list" id="current-books">
       <h3>Current Books:</h3>
 
       {{#each Book as |Book|}}
@@ -25,4 +26,4 @@
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+<script src="./js/search.js"></script>
