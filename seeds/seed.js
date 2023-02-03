@@ -29,3 +29,4 @@ const seedAllDatabase = async () => {
 };
 
 seedAllDatabase();
+
