@@ -1,5 +1,5 @@
-const seedUsers = require("./userData.json");
 const { User, Book, Bookshelf, Comment } = require("../models");
+const seedUsers = require("./userData.json");
 const seedBooks = require("./bookSeedData.json");
 const seedBookshelves = require("./bookshelvesSeedData.json");
 const seedComments = require("./commentsSeedData.json");
@@ -30,36 +30,3 @@ const seedAllDatabase = async () => {
 
 seedAllDatabase();
 
-// const seedDatabase = async () => {
-//   await sequelize.sync({ force: true });
-
-//   const users = await User.bulkCreate(userData, {
-//     individualHooks: true,
-//     returning: true,
-//   });
-
-// for (const book of booksData) {
-//   await Book.create({
-//     ...book,
-//     user_id: users[Math.floor(Math.random() * users.length)].id,
-//   });
-// }
-
-// for (const bookshelf of bookshelfData) {
-//   await Bookshelf.create({
-//     ...bookshelf,
-//     user_id: users[Math.floor(Math.random() * users.length)].id,
-//   });
-// }
-
-// for (const comment of commentData) {
-//   await Comment.create({
-//     ...comment,
-//     user_id: users[Math.floor(Math.random() * users.length)].id,
-//   });
-// }
-
-//   process.exit(0);
-// };
-
-// seedDatabase();
