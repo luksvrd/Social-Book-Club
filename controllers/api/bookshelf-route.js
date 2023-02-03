@@ -9,9 +9,8 @@ router.post("/", withAuth, async (req, res) => {
       // uesr_id: req.session.user_id will be the id of the user that is logged in so that the bookshelf is associated with the user
       user_id: req.session.user_id,
       // bookshelf_name: req.body.bookshelf_name will be the name of the bookshelf that the user wants to create
-      bookshelf_constent: req.body.bookshelf_content
+      bookshelf_constent: req.body.bookshelf_content,
     });
-
 
     res.status(200).json(newBookshelf);
   } catch (err) {
@@ -19,12 +18,13 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-router.put("/:id", withAuth async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const [bookshelfData] = await Bookshelf.update(req.params.id, {
       where: {
         // id: req.params.id will be the id of the bookshelf that the user wants to update
         id: req.params.id,
+        user_id: req.session.user_id,
       },
     });
 
