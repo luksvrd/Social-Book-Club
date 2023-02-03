@@ -4,9 +4,10 @@
   </div>
 </div>
 
-  {{#if readerList.length}}
-  {{!-- {{#if bookshelf.length}} since no readerlist ? --}}
-    <div class="col-md-6 book-list" id="current-books">
+
+  {{#if book.length}}
+  {{#if bookshelf.length}}
+    <div class="col-md-6 book-list">
       <h3>Current Books:</h3>
 
       {{#each Book as |Book|}}

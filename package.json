@@ -19,6 +19,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^5.3.5",
     "express-session": "^1.17.3",
+    "flowbite": "^1.6.3",
     "mysql2": "^2.3.3",
     "sequelize": "^6.28.0"
   },
