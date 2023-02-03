@@ -1,6 +1,5 @@
 const Book = require("./Book");
 const Bookshelf = require("./Bookshelf");
-// const ReaderList = require("./ReaderList");
 const User = require("./User");
 const Comment = require("./Comments");
 
