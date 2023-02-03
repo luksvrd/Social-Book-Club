@@ -1,5 +1,5 @@
-const seedUsers = require("./userData.json");
 const { User, Book, Bookshelf, Comment } = require("../models");
+const seedUsers = require("./userData.json");
 const seedBooks = require("./bookSeedData.json");
 const seedBookshelves = require("./bookshelvesSeedData.json");
 const seedComments = require("./commentsSeedData.json");
@@ -29,4 +29,3 @@ const seedAllDatabase = async () => {
 };
 
 seedAllDatabase();
-
