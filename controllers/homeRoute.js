@@ -1,6 +1,6 @@
 const { Bookshelf, User, Comment, Books } = require("../models");
 const router = require("express").Router();
-const withAuth = require("../utils/auth");
+// const withAuth = require("../utils/auth");
 
 // Get all bookshelves for homepage
 router.get("/", async (req, res) => {
@@ -92,6 +92,11 @@ router.get("/profile", (req, res) => {
   if (req.session.loggedIn) {
     res.render("profile");
   }
+});
+
+// route to search page
+router.get("/search", (req, res) => {
+  res.render("search");
 });
 
 module.exports = router;
