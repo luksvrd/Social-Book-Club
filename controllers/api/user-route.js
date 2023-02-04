@@ -5,16 +5,26 @@ const { User } = require("../../models");
 // route: /api/users
 router.post("/signup", async (req, res) => {
   try {
+    // Create a new user
     const dbUserData = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
+    // Save the user's id to the session and send a success message
+    req.session.userId = dbUserData.id;
+    req.session.loggedIn = true;
+    req.session.save((err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json(err);
+      } else {
+        // console log the user's id
+        console.log(dbUserData.id);
+        res
+          .status(200)
+          .json({ userID: dbUserData.id, message: "You are now logged in!" });
+      }
     });
   } catch (err) {
     console.log(err);
@@ -22,44 +32,46 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Add a route to log in a user
+// add a route to log in and save the user's id to the session
 // route: /api/users/login
 router.post("/login", async (req, res) => {
   try {
-    const dbUserData = await User.findOne({ where: { email: req.body.email } });
-
+    // Find the user who matches the posted e-mail address
+    const dbUserData = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+    // If there is no user with the posted e-mail address, send an error message
     if (!dbUserData) {
-      res
-        // a 400 error is a client error. It means the user did something wrong
-        .status(400)
-        .json({
-          message:
-            "The credentials provided could not be found in our database. Please try again.",
-        });
+      res.status(400).json({ message: "Incorrect email or password" });
       return;
     }
-
+    // If there is a user with the posted e-mail address, check the password
     const validPassword = await dbUserData.checkPassword(req.body.password);
-
+    // If the password is incorrect, send an error message
     if (!validPassword) {
-      res.status(400).json({
-        message:
-          "The credentials provided could not be found in our database. Please try again.",
-      });
+      res.status(400).json({ message: "Incorrect email or password" });
       return;
     }
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res
-        .status(200)
-        .json({ user: dbUserData, message: "You are now logged in!" });
+    // If the password is correct, save the user's id to the session and send a success message
+    req.session.userId = dbUserData.id;
+    req.session.loggedIn = true;
+    req.session.save((err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json(err);
+      } else {
+        // console log the user's id
+        console.log(dbUserData.id);
+        res
+          .status(200)
+          .json({ userID: dbUserData.id, message: "You are now logged in!" });
+      }
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
-    // .json({ message: "There was an error logging in. Please try again." });
   }
 });
 
@@ -79,6 +91,14 @@ router.post("/logout", (req, res) => {
   }
 });
 
-// Add route to render the user's profile page if they are logged in
+// route to get the id of the current user
+// route: /api/user/get-id
+router.get("/get-id", (req, res) => {
+  if (req.session.loggedIn) {
+    res.status(200).json({ userID: req.session.userId });
+  } else {
+    res.status(404).end();
+  }
+});
 
 module.exports = router;
