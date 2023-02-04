@@ -4,13 +4,10 @@
   </div>
 </div>
 
-<div class="button">
-  <button class="btn btn-primary">Bookshelf</button>
-</div>
-
 {{! Create list of book titles saved in bookshelf from bookshelf array }}
 <div class="bookshelf">
   <h2>Bookshelf</h2>
+  <button id="render-bs" type="submit" class="btn btn-primary">View Bookshelf</button>
   <ul>
     {{#each bookshelf as |book|}}
       <li>{{book.Title}}</li>
@@ -18,4 +15,4 @@
   </ul>
 </div>
 
-<script src="./js/search.js"></script>
+<script src="./js/profile.js"></script>
