@@ -1,64 +1,35 @@
-// function to add a book to the database
-const addBook = async (event) => {
-  // get the book info from the card
-  const book = {
-    title: event.target.parentNode.querySelector(".card-title").textContent,
-    author: event.target.parentNode.querySelector(".card-subtitle").textContent,
-    isbn: event.target.parentNode.querySelector(".card-text").textContent,
-  };
-
-  // check if the book is already in the database by isbn
-  const response = await fetch(`/api/books/isbn/${book.isbn}`);
-  const data = await response.json();
-
-  // if the book is not in the database, add it
-  if (!data) {
-    const response = await fetch("/api/books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(book),
-    });
-    const bookData = await response.json();
-    // return just the book id from the bookData
-    return bookData.id;
-  } else {
-    console.log("Book already in database");
-  }
-};
-
-// function to get a user's bookshelf
-const getBookshelf = async (userId) => {
-  // get the user's bookshelf
-  const response = await fetch("/api/bookshelf");
-  const bookshelfData = await response.json();
-  // get only the bookshelf_contents from the bookshelfData
-  const bookshelf = bookshelfData.bookshelf_contents;
-  // turn the bookshelf_contents into an array
-  const bookshelfArray = bookshelf.split(",");
-  // return the bookshelf array
-  return bookshelfArray;
-};
-
-// function to check if there is a user logged in
-const getUserId = async () => {
-  // get the user's id
-  const response = await fetch("/api/user/get-id");
-  const userData = await response.json();
-
-  return userData.userID;
-};
+import { addBook, getBookshelf, getUserId } from "./bookshelfHandler.js";
 
 // function to add the book to a bookshelf
 const addToBookshelf = async (event) => {
   // call the addBook function to add the book to the database
   const book = await addBook(event);
-  console.log(book);
 
   // get the user's id
   const userId = await getUserId();
-  console.log(userId);
+
+  // use the userID to get the user's bookshelf
+  const bookshelf = await getBookshelf(userId);
+
+  // push the book id to the bookshelf array
+  bookshelf.push(book);
+
+  // join the bookshelf array into a string
+  const bookshelfString = bookshelf.join(",");
+
+  // update the bookshelf in the database
+  const response = await fetch(`/api/bookshelf/user/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ bookshelf_content: bookshelfString }),
+  });
+  const bookshelfData = await response.json();
+  console.log(bookshelfData);
+
+  // remove the add to bookshelf button
+  event.target.parentNode.removeChild(event.target);
 };
 
 // form submit event listener to get search parameters and make a request to openlibrary.org
