@@ -42,9 +42,26 @@
 
 const button = document.getElementById("render-bs");
 
-function getUserId() {
-  const userId = document.cookie.match(/userId=(\d+)/);
-  return userId ? userId[1] : null;
+async function getUserId() {
+  // make a call to api/user/get-id
+  // return the user id
+  const response = await fetch("/api/user/get-id");
+  const userData = await response.json();
+  return userData.userID;
+}
+
+async function queryBookshelf(userId) {
+  // Query the database for the user's bookshelf
+  const response = await fetch(`/api/bookshelf/${userId}`);
+  const bookshelf = await response.json();
+  return bookshelf;
+}
+
+async function queryBooks(bookshelf) {
+  // Query the database for the books in the user's bookshelf
+  const response = await fetch(`/api/books?bookshelfId=${bookshelf.id}`);
+  const books = await response.json();
+  return books;
 }
 
 button.addEventListener("click", async () => {
@@ -62,22 +79,3 @@ button.addEventListener("click", async () => {
     bookshelfContainer.appendChild(bookElement);
   });
 });
-
-async function queryBookshelf(userId) {
-  // Query the database for the user's bookshelf
-  const response = await fetch(`/api/bookshelf?userId=${userId}`);
-  const bookshelf = await response.json();
-  return bookshelf;
-}
-
-async function queryBooks(bookshelf) {
-  // Query the database for the books in the user's bookshelf
-  const response = await fetch(`/api/books?bookshelfId=${bookshelf.id}`);
-  const books = await response.json();
-  return books;
-}
-
-// function getUserId() {
-//   // Get the user ID from your authentication system
-//   return 1; // Replace this with your own code to retrieve the user ID
-// }
