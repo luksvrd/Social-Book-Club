@@ -3,35 +3,20 @@ const withAuth = require("../../utils/auth");
 const { Bookshelf, Book } = require("../../models");
 
 // ****************** Bookshelf Routes ******************
-// route to get boookshelf by user id & parse books into json
-router.get("/", async (req, res) => {
-  const userId = req.query.userId;
-  if (!userId) {
-    return res.status(400).json({ error: "Missing userId parameter" });
-  }
-
+// route to get bookshelf by user id
+router.get("/:user_id", withAuth, async (req, res) => {
   try {
-    const bookshelf = await Bookshelf.findOne({
+    const bookshelfData = await Bookshelf.findAll({
       where: {
-        user_id: userId,
+        user_id: req.params.user_id,
       },
-      include: [
-        {
-          model: Book,
-          required: false,
-        },
-      ],
     });
-
-    if (!bookshelf) {
-      return res.status(404).json({ error: "Bookshelf not found" });
-    }
-
-    return res.json(bookshelf);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(200).json(bookshelfData);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
+
 // Add a route to get all the user's bookshelves
 // route will be /api/bookshelf
 // router.get("/", withAuth, async (req, res) => {
