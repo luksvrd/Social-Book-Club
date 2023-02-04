@@ -125,4 +125,9 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+// route to the search page
+router.get("/search", (req, res) => {
+  res.render("search");
+});
+
 module.exports = router;
