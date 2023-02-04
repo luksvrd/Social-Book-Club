@@ -22,6 +22,9 @@ const addToBookshelf = async (event) => {
     });
     const data = await response.json();
     console.log(data);
+  } else {
+    // if the book is already in the database, do nothing
+    console.log("Book already in database");
   }
 };
 
