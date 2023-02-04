@@ -11,13 +11,12 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
+// Set up sessions with cookies
 const sess = {
   secret: "Super secret secret",
   cookie: {
-    maxAge: 300000,
-    httpOnly: true,
-    secure: false,
-    sameSite: "strict",
+    // Stored in milliseconds
+    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
   },
   resave: false,
   saveUninitialized: true,
@@ -41,7 +40,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(require ("./controllers/"));
 app.use(routes);
-
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
