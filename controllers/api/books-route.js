@@ -39,4 +39,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// add route to get a book by isbn
+// route: /api/books/isbn/:isbn
+router.get("/isbn/:isbn", async (req, res) => {
+  try {
+    const bookData = await Book.findOne({
+      where: {
+        isbn: req.params.isbn,
+      },
+    });
+    res.status(200).json(bookData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

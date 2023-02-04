@@ -2,11 +2,11 @@
   {
     "id": 1,
     "user_id": 1,
-    "bookshelf_content": "The Hitchhiker's Guide to the Galaxy"
+    "bookshelf_content": "1,2,3"
   },
   {
     "id": 2,
     "user_id": 2,
-    "bookshelf_content": "The Hobbit"
+    "bookshelf_content": "1,2"
   }
 ]

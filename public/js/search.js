@@ -1,3 +1,66 @@
+// function to add a book to the database
+const addBook = async (event) => {
+  // get the book info from the card
+  const book = {
+    title: event.target.parentNode.querySelector(".card-title").textContent,
+    author: event.target.parentNode.querySelector(".card-subtitle").textContent,
+    isbn: event.target.parentNode.querySelector(".card-text").textContent,
+  };
+
+  // check if the book is already in the database by isbn
+  const response = await fetch(`/api/books/isbn/${book.isbn}`);
+  const data = await response.json();
+
+  // if the book is not in the database, add it
+  if (!data) {
+    const response = await fetch("/api/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(book),
+    });
+    const bookData = await response.json();
+    // return just the book id from the bookData
+    return bookData.id;
+  } else {
+    console.log("Book already in database");
+  }
+};
+
+// function to get a user's bookshelf
+const getBookshelf = async (userId) => {
+  // get the user's bookshelf
+  const response = await fetch("/api/bookshelf");
+  const bookshelfData = await response.json();
+  // get only the bookshelf_contents from the bookshelfData
+  const bookshelf = bookshelfData.bookshelf_contents;
+  // turn the bookshelf_contents into an array
+  const bookshelfArray = bookshelf.split(",");
+  // return the bookshelf array
+  return bookshelfArray;
+};
+
+// function to check if there is a user logged in
+const getUserId = async () => {
+  // get the user's id
+  const response = await fetch("/api/user/get-id");
+  const userData = await response.json();
+
+  return userData.userID;
+};
+
+// function to add the book to a bookshelf
+const addToBookshelf = async (event) => {
+  // call the addBook function to add the book to the database
+  const book = await addBook(event);
+  console.log(book);
+
+  // get the user's id
+  const userId = await getUserId();
+  console.log(userId);
+};
+
 // form submit event listener to get search parameters and make a request to openlibrary.org
 document
   .getElementById("search-form")
@@ -50,16 +113,22 @@ document
       };
       // create a card for each book
       const card = document.createElement("div");
-      card.classList.add("card");
+      card.classList.add("card", "border-sm", "border-black");
       card.innerHTML = `
         <img src="${book.cover}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${book.title}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${book.author}</p>
+          <h5 class="card-subtitle mb-2 text-muted">${book.author}</h5>
           <p class="card-text"> ISBN: ${book.isbn}</p>
-          <a class="btn btn-blue">Add to Bookshelf</a>
+          <button class="card-button">
+          Add to Bookshelf </button>
         </div>
       `;
+
+      // add events to the card buttons
+      card
+        .querySelector(".card-button")
+        .addEventListener("click", addToBookshelf);
 
       // append the cards to the search results container
       document.getElementById("search-results").appendChild(card);
@@ -72,91 +141,3 @@ document
     document.getElementById("book-name").value = "";
     document.getElementById("author").value = "";
   });
-
-// // function to add a book to the bookshelf
-// function addToBookshelf() {
-//   // get the book data from the card
-//   const book = {
-//     title: this.parentElement.children[1].children[0].innerText,
-//     author: this.parentElement.children[1].children[1].innerText,
-//     isbn: this.parentElement.children[1].children[2].innerText,
-//   };
-
-//   // create a new book object
-//   const newBook = new Book(book.title, book.author, book.isbn);
-
-//   // create a loading spinner
-//   const spinner = document.createElement("div");
-//   spinner.classList.add("spinner-border");
-//   spinner.setAttribute("role", "status");
-//   spinner.innerHTML = `
-//     <span class="visually-hidden">Loading...</span>
-//   `;
-//   this.parentElement.appendChild(spinner);
-
-//   // send book to "/api/books" route with a check by isbn to see if it already exists
-//   fetch("/api/books", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(newBook),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // if the book already exists, display a message
-//       if (data.message) {
-//         alert(data.message);
-//       } else {
-//         // if the book doesn't exist, save it to the database and display a message
-//         alert("Book added to bookshelf!");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//     });
-
-//   // get book_id of new book from the database
-//   fetch("/api/books", {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // get the book_id of the book that was just added
-//       const book_id = data[data.length - 1].book_id;
-//       // create a new bookshelf object
-//       const newBookshelf = new Bookshelf(book_id, 1);
-//       // add to user's bookshelf in the database using the book_id
-//       fetch("/api/bookshelf", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(newBookshelf),
-//       })
-//         .then((response) => response.json())
-//         .then((data) => {
-//           console.log(data);
-//         })
-//         .catch((error) => {
-//           console.error("Error:", error);
-//         });
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//     });
-
-//   // remove the loading spinner
-//   this.parentElement.removeChild(spinner);
-
-//   // remove the add to bookshelf button
-//   this.remove();
-// }
-
-// // add event listener to the add to bookshelf button
-// document.querySelectorAll(".btn-blue").forEach((button) => {
-//   button.addEventListener("click", addToBookshelf);
-// });
