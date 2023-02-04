@@ -1,26 +1,23 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-// Add a route to create a new user
+// Add a route to create a new user and render the homepage
 // route: /api/users
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
-    const newUser = await User.create({
+    const dbUserData = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
-      // this is the id of the user in the database
-      req.session.id = newUser.id;
-      req.session.email = newUser.email;
       req.session.loggedIn = true;
 
-      res.status(200).json(newUser);
+      res.status(200).json(dbUserData);
     });
   } catch (err) {
-    // a 500 error is a server error
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -29,9 +26,9 @@ router.post("/", async (req, res) => {
 // route: /api/users/login
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ where: { email: req.body.email } });
+    const dbUserData = await User.findOne({ where: { email: req.body.email } });
 
-    if (!user) {
+    if (!dbUserData) {
       res
         // a 400 error is a client error. It means the user did something wrong
         .status(400)
@@ -42,7 +39,7 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    const validPassword = await user.checkPassword(req.body.password);
+    const validPassword = await dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res.status(400).json({
@@ -53,20 +50,20 @@ router.post("/login", async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.email = user.email;
       req.session.loggedIn = true;
 
-      res.json({ user, message: "You are now logged in!" });
+      res
+        .status(200)
+        .json({ user: dbUserData, message: "You are now logged in!" });
     });
   } catch (err) {
-    res
-      .status(400)
-      .json(
-        "The credentials provided could not be found in our database. Please try again."
-      );
+    console.log(err);
+    res.status(500).json(err);
+    // .json({ message: "There was an error logging in. Please try again." });
   }
 });
+
+// After The user logs in or signs up, they will be redirected to the homepage. The homepage will display the user's name and a logout button. The logout button will be a form that will send a POST request to the logout route. The logout route will destroy the session and redirect the user to the homepage.
 
 // Add a route to log out a user
 // route: /api/users/logout
@@ -81,5 +78,7 @@ router.post("/logout", (req, res) => {
     res.status(404).end();
   }
 });
+
+// Add route to render the user's profile page if they are logged in
 
 module.exports = router;

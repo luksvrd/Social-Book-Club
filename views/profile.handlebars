@@ -4,27 +4,18 @@
   </div>
 </div>
 
+<div class="button">
+  <button class="btn btn-primary">Bookshelf</button>
+</div>
 
-  {{#if book.length}}
-  {{#if bookshelf.length}}
-    <div class="col-md-6 book-list">
-      <h3>Current Books:</h3>
-
-      {{#each Book as |Book|}}
-        <div class="row mb-2">
-          <div class="col-md-8">
-            <h4><a href="/book/{{Book.id}}">{{Book.name}}</a></h4>
-          </div>
-          <div class="col-md-4">
-            <button
-              class="btn btn-sm btn-danger"
-              data-id="{{Book.id}}"
-            >DELETE</button>
-          </div>
-        </div>
-      {{/each}}
-    </div>
-  {{/if}}
+{{! Create list of book titles saved in bookshelf from bookshelf array }}
+<div class="bookshelf">
+  <h2>Bookshelf</h2>
+  <ul>
+    {{#each bookshelf as |book|}}
+      <li>{{book.Title}}</li>
+    {{/each}}
+  </ul>
 </div>
 
 <script src="./js/search.js"></script>
