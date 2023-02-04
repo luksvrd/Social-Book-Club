@@ -1,81 +1,39 @@
-// const { Bookshelf } = require("../../models");
-// const { User } = require("../../models");
-// const { Book } = require("../../models");
-//  Get the user _id from our database and through that access their bookshelf
-
-// GET user_id -> GET bookshelf contents->
-// const bookshelfHandler = async function (event) {
-//   event.preventDefault();
-
-//   console.log("Bookshelf btn was clicked");
-
-//   const response = await fetch("/api/bookshelf/", {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//   });
-
-//   if (response.ok) {
-//     console.log(response);
-//     // If successful, redirect the browser to the profile page
-//     const bookshelf = await response.json();
-//     const contents = bookshelf.bookshelf_contents;
-//     const bookshelfArray = contents.split(",");
-//     console.log(bookshelfArray);
-//   } else {
-//     alert(response.statusText);
-//   }
-// };
-
-// // Add event listener to load the html
-// document.addEventListener("DOMContentLoaded", bookshelfHandler);
-// document
-//   .querySelector("#render-bs")
-//   .addEventListener("submit", bookshelfHandler);
-
-// stringify -> arrayFrom(string)->
-// iterate over array making calls to our database for the books->
-// generate cards from that data
-// When lookingfor img ling its in the search.js file
-
-// Request user form our db & Access their bookshelf
-// GET user_id ->
-
+import { getBookshelf, getUserId } from "./bookshelfHandler.js";
 const button = document.getElementById("render-bs");
-
-async function getUserId() {
-  // make a call to api/user/get-id
-  // return the user id
-  const response = await fetch("/api/user/get-id");
-  const userData = await response.json();
-  return userData.userID;
-}
-
-async function queryBookshelf(userId) {
-  // Query the database for the user's bookshelf
-  const response = await fetch(`/api/bookshelf/${userId}`);
-  const bookshelf = await response.json();
-  return bookshelf;
-}
-
-async function queryBooks(bookshelf) {
-  // Query the database for the books in the user's bookshelf
-  const response = await fetch(`/api/books?bookshelfId=${bookshelf.id}`);
-  const books = await response.json();
-  return books;
-}
+// If
 
 button.addEventListener("click", async () => {
-  // Get the user ID from your authentication system which is stored in the session cookie
-  // getUserID() need to be ca
-  // const userId = getUserId(); // Get the user ID from your authentication system
-  const bookshelf = await queryBookshelf(getUserId); // Query the database for the user's bookshelf
-  const books = await queryBooks(bookshelf); // Query the database for the books in the user's bookshelf
+  const userId = await getUserId();
+  const bookshelf = await getBookshelf(userId);
+  console.log(bookshelf);
 
-  // Generate the bookshelf in the front end
-  const bookshelfContainer = document.getElementById("render-bs");
-  books.forEach((book) => {
-    const bookElement = document.createElement("div");
-    bookElement.innerHTML = book.title;
-    bookshelfContainer.appendChild(bookElement);
-  });
+  // itterate through the array with a for loop and make a call to the satabase for each book
+  // then render the books
+  // const bookshelfContainer = document.getElementById("bookshelf-list");
+
+  for (let i = 0; i < bookshelf.length; i++) {
+    // call to the database through the api
+    const bookId = bookshelf[i];
+    console.log(bookId);
+    const response = await fetch(`/api/books/${bookId}`);
+    const book = await response.json();
+    console.log(book);
+    // render the book
+    const bookshelfContainer = document.getElementById("bookshelf-list");
+    const title = await book.title;
+    const author = await book.author;
+    const cover =
+      await `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+
+    const card = document.createElement("div");
+    card.classList.add("card", "border-sm", "border-black");
+    card.innerHTML = `
+        <img src="${cover}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${title}</h5>
+          <h5 class="card-subtitle mb-2 text-muted">${author}</h5>
+        </div>
+      `;
+    bookshelfContainer.appendChild(card);
+  }
 });
