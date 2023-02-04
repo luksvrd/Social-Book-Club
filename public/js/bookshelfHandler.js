@@ -30,8 +30,8 @@ export async function addBook(event) {
   }
 }
 
-export // function to get a user's id
-async function getUserId() {
+// function to get a user's id
+export async function getUserId() {
   // get the user's id
   const response = await fetch("/api/user/get-id");
   const userData = await response.json();
@@ -39,8 +39,8 @@ async function getUserId() {
   return userData.userID;
 }
 
-export // refactor above to be a function instead of const
-async function getBookshelf(userId) {
+// function to get a user's bookshelf
+export async function getBookshelf(userId) {
   // get the user's bookshelf using userID in the req params
   const response = await fetch(`/api/bookshelf/user/${userId}`);
   const bookshelfData = await response.json();
@@ -51,4 +51,15 @@ async function getBookshelf(userId) {
   // make an array of the book ids in the bookshelf
   const bookIds = bookshelfContent.split(",");
   return bookIds;
+}
+
+// function to check if a user is logged in
+export async function checkLogin() {
+  // get the user's id
+  const response = await fetch("/api/user/get-id");
+  const userData = await response.json();
+  // if the user is not logged in, redirect to the login page
+  if (!userData.userID) {
+    window.location.replace("/login");
+  }
 }
