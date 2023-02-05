@@ -1,4 +1,4 @@
-const { Bookshelf, User, Comment, Books } = require("../models");
+const { Bookshelf, User, Books } = require("../models");
 const router = require("express").Router();
 // const withAuth = require("../utils/auth");
 
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("homepage", {
       bookshelf,
-      logged_in: req.session.logged_in,
+      logged_in: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -51,30 +51,6 @@ router.get("/signup", (req, res) => {
   }
 
   res.render("login");
-});
-
-// Add a route to get a single comment and render the new comment page with the comment's data
-router.get("/comment/:id", async (req, res) => {
-  try {
-    const commentData = await Comment.findByPk(req.params.id, {
-      include: [
-        {
-          model: Books,
-          attributes: ["title"],
-        },
-        { model: User, attributes: ["name"] },
-      ],
-    });
-
-    const comment = commentData.get({ plain: true });
-    // Was "edit-comment"
-    res.render("comment", {
-      ...comment,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 // If a user is already logged in, redirect the request to another route. If not, render the login page
