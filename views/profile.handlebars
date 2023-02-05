@@ -1,12 +1,11 @@
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+    <h2>Welcome, {{user.username}}!</h2>
   </div>
 </div>
 
 {{! Create list of book titles saved in bookshelf from bookshelf array }}
 <div class="bookshelf">
-  <h2>Bookshelf</h2>
   <button id="render-bs" type="submit" class="btn btn-primary">View Bookshelf</button>
   <div id="bookshelf-list"></div>
 </div>
