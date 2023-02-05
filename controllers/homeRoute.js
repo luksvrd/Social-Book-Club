@@ -22,7 +22,8 @@ router.get("/", async (req, res) => {
     );
 
     // Pass serialized data and session flag into template
-    res.render("homepage", {
+    // res.render("homepage", { previously
+    res.render("profile", {
       bookshelf,
       logged_in: req.session.loggedIn,
     });
@@ -50,10 +51,10 @@ router.get("/signup", (req, res) => {
     return;
   }
 
-  res.render("login");
+  res.render("signup");
 });
 
-// If a user is already logged in, redirect the request to another route. If not, render the login page
+// If a user is already logged in, redirect the request to their profile. If not, render the login page
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/profile");
