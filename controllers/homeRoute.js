@@ -72,7 +72,13 @@ router.get("/profile", (req, res) => {
 
 // route to search page
 router.get("/search", (req, res) => {
-  res.render("search");
+  // if user is logged in, render the search page
+  if (req.session.loggedIn) {
+    res.render("search");
+  } else {
+    // if user is not logged in, redirect to login page
+    res.redirect("/login");
+  }
 });
 
 module.exports = router;

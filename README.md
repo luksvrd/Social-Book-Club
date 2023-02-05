@@ -8,19 +8,13 @@ This application brings together new technologies and concepts such as Node.js, 
 
 Repository: https://github.com/luksvrd/Social-Book-Club
 
-```
+````
 Heroku:
 
 # User Story
-
-```
-
-# Acceptance Criteria
-
-````
-
-
-
+AS and avid reader,
+I WANT to be able to create a profile, login, and create a personal bookshelf to keep track of books I have read,
+SO THAT I can successfully read through my collection of books and track my progress.
 
 ## Installation/Usage
 
@@ -45,16 +39,18 @@ As a user, you will be able to:
 
 * Create a profile
 * Login
-* Create a post
-* Comment on a post
-* Edit a post
-* Delete a post
-* Edit a comment
-* Delete a comment
+* Create a personal Bookshelf to keep track of books you have read
 
 ## Mock-Up
 
 //add mock-up here
+
+## Future Development
+
+Ongoing goals in development include:
+* Adding Comments to User's Bookshelves
+* Adding Reviews to Books
+* User reading lists to keep track of books they want to read
 
 ## Credits
 
