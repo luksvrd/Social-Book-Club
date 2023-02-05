@@ -13,6 +13,7 @@ Bookshelf.init(
     },
     bookshelf_content: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
