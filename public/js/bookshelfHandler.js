@@ -48,9 +48,15 @@ export async function getBookshelf(userId) {
   const bookshelfObj = bookshelfData[0];
   // get bookshelf_content from the bookshelf object
   const bookshelfContent = bookshelfObj.bookshelf_content;
-  // make an array of the book ids in the bookshelf
-  const bookIds = bookshelfContent.split(",");
-  return bookIds;
+  // if the bookshelf length is 0, set it to an empty array
+  if (bookshelfContent.length === 0) {
+    const bookIds = [];
+    return bookIds;
+  } else {
+    // make an array of the book ids in the bookshelf
+    const bookIds = bookshelfContent.split(",");
+    return bookIds;
+  }
 }
 
 // function to check if a user is logged in
