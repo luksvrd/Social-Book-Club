@@ -3,32 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Over-Booked</title>
-    <link rel="shortcut icon" href="#" />
-    <title>Over Booked</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x/dist/tailwind.min.css"
       rel="stylesheet"
     />
     <link rel="text/css" href="/public/css/dist/output.css" />
     <link rel="shortcut icon" href="#" />
+    <title>Over-Booked</title>
   </head>
 
+{{!-- main page --}}
   <body>
-    <div class="flex-column justify-space-around">
-      <header class="display-flex justify-space-between align-center p-2">
-        <h1>
-          {{! <span role="img" aria-label="book">📚</span> }}
-          <a href="/">Welcome to Over-Booked!</a>
-        </h1>
-        <nav>
-
-          <a href="/login">Login</a>
-
-        </nav>
-      </header>
-      <main class="container container-fluid mt-5">
+    <header class="container-fluid">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <ul class="nav">
+            <a class="nav-link active" aria-current="page" href="/login">Login</a>
+          </ul>
+        </div>
+        <div class="text-center">
+          <h1>
+            <span role="img" aria-label="book">📚</span>
+            <a href="/">Welcome to Over-Booked!</a>
+          </h1>
+        </div>
+      </nav>
+      <div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9MkHUZBj2aqIcdqUh60WR-kSjeh3evHDvAop88WAMlvbbb6xu&s" alt="social_book_club" class="center" width="600" height="600" />
+      </div>
+    </header>
+      <main class="hidden">
+        <div class="container container-fluid mt-5">
         <!-- Render the sub layout -->
+        </div>
         {{{body}}}
 
       </main>
@@ -37,5 +44,5 @@
       </footer>
     </div>
   </body>
-
+<script src="/public/js/login.js"></script>
 </html>
