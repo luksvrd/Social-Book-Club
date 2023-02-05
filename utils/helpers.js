@@ -20,7 +20,7 @@ module.exports = {
     }
   },
   // helper called logged_in to check if a user is logged in
-  logged_in: (req) => {
-    return req.session.logged_in;
+  loggedIn: (req) => {
+    return req.session.loggedIn;
   },
 };
