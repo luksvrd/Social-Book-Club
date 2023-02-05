@@ -5,16 +5,13 @@ const button = document.getElementById("render-bs");
 button.addEventListener("click", async () => {
   const userId = await getUserId();
   const bookshelf = await getBookshelf(userId);
-  console.log(bookshelf);
 
   // loop through the bookshelf array and render each book
   for (let i = 0; i < bookshelf.length; i++) {
     // call to the database through the api
     const bookId = bookshelf[i];
-    console.log(bookId);
     const response = await fetch(`/api/books/${bookId}`);
     const book = await response.json();
-    console.log(book);
     // render the book
     const bookshelfContainer = document.getElementById("bookshelf-list");
     const title = await book.title;
