@@ -19,4 +19,8 @@ module.exports = {
       return `<span for="img" aria-label="gear">⚙️</span>`;
     }
   },
+  // helper called logged_in to check if a user is logged in
+  logged_in: (req) => {
+    return req.session.logged_in;
+  },
 };

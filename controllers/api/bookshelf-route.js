@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const withAuth = require("../../utils/auth");
-const { Bookshelf, Book } = require("../../models");
+const { Bookshelf } = require("../../models");
 
-// ****************** Bookshelf Routes ******************
 // route to get bookshelf by user id
 router.get("/user/:user_id", async (req, res) => {
   try {
@@ -53,6 +52,16 @@ router.delete("/:id", withAuth, async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+// route to create a new bookshelf with a user id
+router.post("/", async (req, res) => {
+  try {
+    const bookshelfData = await Bookshelf.create(req.body);
+    res.status(200).json(bookshelfData);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

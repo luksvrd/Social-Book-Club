@@ -75,8 +75,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// After The user logs in or signs up, they will be redirected to the homepage. The homepage will display the user's name and a logout button. The logout button will be a form that will send a POST request to the logout route. The logout route will destroy the session and redirect the user to the homepage.
-
 // Add a route to log out a user
 // route: /api/users/logout
 router.post("/logout", (req, res) => {
@@ -98,6 +96,24 @@ router.get("/get-id", (req, res) => {
     res.status(200).json({ userID: req.session.userId });
   } else {
     res.status(404).end();
+  }
+});
+
+// route to get a user by id
+// route: /api/user/:id
+router.get("/:id", async (req, res) => {
+  try {
+    const dbUserData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+    });
+    if (!dbUserData) {
+      res.status(404).json({ message: "No user found with this id" });
+      return;
+    }
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 

@@ -1,7 +1,6 @@
 const Book = require("./Book");
 const Bookshelf = require("./Bookshelf");
 const User = require("./User");
-const Comment = require("./Comments");
 
 // Bookshelf belongs to User
 Bookshelf.belongsTo(User, {
@@ -23,18 +22,6 @@ Book.belongsTo(Bookshelf, {
 
 // User has many Bookshelves
 User.hasMany(Bookshelf, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-
-// User has many Comments
-User.hasMany(Comment, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-
-// Comment belongs to User
-Comment.belongsTo(User, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });

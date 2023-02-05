@@ -1,8 +1,7 @@
-const { User, Book, Bookshelf, Comment } = require("../models");
+const { User, Book, Bookshelf } = require("../models");
 const seedUsers = require("./userData.json");
 const seedBooks = require("./bookSeedData.json");
 const seedBookshelves = require("./bookshelvesSeedData.json");
-const seedComments = require("./commentsSeedData.json");
 
 const sequelize = require("../config/connection");
 
@@ -22,11 +21,7 @@ const seedAllDatabase = async () => {
   await Bookshelf.bulkCreate(seedBookshelves);
   console.log("\n----- BOOKSHELVES SEEDED -----\n");
 
-  await Comment.bulkCreate(seedComments);
-  console.log("\n----- COMMENTS SEEDED -----\n");
-
   process.exit(0);
 };
 
 seedAllDatabase();
-

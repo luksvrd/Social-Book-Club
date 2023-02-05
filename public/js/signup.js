@@ -1,3 +1,6 @@
+import { getUserId } from "./bookshelfHandler.js";
+
+// This is the code that runs when the page loads
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -8,7 +11,7 @@ const signupFormHandler = async (event) => {
   const passwordEl = document.querySelector("#password-signup").value.trim();
 
   if (nameEl && emailEl && passwordEl) {
-    const response = await fetch("/api/user", {
+    const response = await fetch("/api/user/signup", {
       method: "POST",
       body: JSON.stringify({
         name: nameEl,
@@ -19,6 +22,21 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
+      // get the user's id
+      const userId = await getUserId();
+      // make a bookshelf for the user
+      const response = await fetch("/api/bookshelf", {
+        method: "POST",
+        body: JSON.stringify({
+          user_id: userId,
+          bookshelf_name: "My Bookshelf",
+          bookshelf_content: "",
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        console.log("bookshelf created");
+      }
       document.location.replace("/profile");
     } else {
       alert(response.statusText);

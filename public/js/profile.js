@@ -7,10 +7,7 @@ button.addEventListener("click", async () => {
   const bookshelf = await getBookshelf(userId);
   console.log(bookshelf);
 
-  // itterate through the array with a for loop and make a call to the satabase for each book
-  // then render the books
-  // const bookshelfContainer = document.getElementById("bookshelf-list");
-
+  // loop through the bookshelf array and render each book
   for (let i = 0; i < bookshelf.length; i++) {
     // call to the database through the api
     const bookId = bookshelf[i];
