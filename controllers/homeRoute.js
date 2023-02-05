@@ -75,10 +75,10 @@ router.get("/search", (req, res) => {
   // if user is logged in, render the search page
   if (req.session.loggedIn) {
     res.render("search");
+  } else {
+    // if user is not logged in, redirect to login page
+    res.redirect("/login");
   }
-
-  // if user is not logged in, redirect to login page
-  res.redirect("/login");
 });
 
 module.exports = router;
