@@ -1,4 +1,4 @@
-const { Bookshelf, User, Comment, Books } = require("../models");
+const { Bookshelf, User, Books } = require("../models");
 const router = require("express").Router();
 // const withAuth = require("../utils/auth");
 
@@ -53,30 +53,6 @@ router.get("/signup", (req, res) => {
   res.render("login");
 });
 
-// Add a route to get a single comment and render the new comment page with the comment's data
-router.get("/comment/:id", async (req, res) => {
-  try {
-    const commentData = await Comment.findByPk(req.params.id, {
-      include: [
-        {
-          model: Books,
-          attributes: ["title"],
-        },
-        { model: User, attributes: ["name"] },
-      ],
-    });
-
-    const comment = commentData.get({ plain: true });
-    // Was "edit-comment"
-    res.render("comment", {
-      ...comment,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // If a user is already logged in, redirect the request to another route. If not, render the login page
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
@@ -96,7 +72,13 @@ router.get("/profile", (req, res) => {
 
 // route to search page
 router.get("/search", (req, res) => {
-  res.render("search");
+  // if user is logged in, render the search page
+  if (req.session.loggedIn) {
+    res.render("search");
+  }
+
+  // if user is not logged in, redirect to login page
+  res.redirect("/login");
 });
 
 module.exports = router;

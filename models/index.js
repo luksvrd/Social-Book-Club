@@ -26,4 +26,4 @@ User.hasMany(Bookshelf, {
   onDelete: "CASCADE",
 });
 
-module.exports = { Book, Bookshelf, User, Comment };
+module.exports = { Book, Bookshelf, User };
