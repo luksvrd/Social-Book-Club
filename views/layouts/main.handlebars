@@ -6,6 +6,10 @@
     <title>Over-Booked</title>
     <link rel="shortcut icon" href="#" />
     <title>Over Booked</title>
+    {{! <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x/dist/tailwind.min.css"
+      rel="text/css"
+    /> }}
     <link rel="text/css" href="/public/css/dist/output.css" />
     <link rel="shortcut icon" href="#" />
   </head>
@@ -18,12 +22,8 @@
           <a href="/">Welcome to Over-Booked!</a>
         </h1>
         <nav>
-          <a href="/search">Search for Books!</a>
-          <!-- Conditionally render login or logout links -->
-          {{#if logged_in}}
 
-            <a href="/profile">profile</a>
-            <svg
+          {{! <svg
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
@@ -36,17 +36,11 @@
                 stroke-linejoin="round"
                 d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
               ></path>
-            </svg>
-            |
-            <a href="/dashboard">dashboard</a>
-            |
+            </svg> }}
+          | |
 
-            <a href="/profile">Profile</a>
-            |
-            <a href="#" id="logout-link">logout</a>
-          {{else}}
-            <a href="/login">login</a>
-          {{/if}}
+          <a href="/login">Login</a>
+
         </nav>
       </header>
       <main class="container container-fluid mt-5">
@@ -60,10 +54,7 @@
     </div>
 
     <!-- Render script for logged in users only -->
-    {{#if logged_in}}
-      <script src="/public/js/logout.js"></script>
-      <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-    {{/if}}
+    <script type="module" src="/js/login.js"></script>
   </body>
 
 </html>
