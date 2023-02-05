@@ -1,19 +1,29 @@
 <nav>
-  <a href="/search">Search for Books!</a>
-
-  <a href="#" id="logout">logout</a>
+  <a href="/search" class="block px-4 py-2 text-base" id="searchBooks">Search
+    for Books!</a>
+  |
+  <a href="#" class="block px-4 py-2 text-base" id="logout">Logout</a>
 
 </nav>
 
-<div class="row">
+<section class="row">
   <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+    <h2>Greetings!</h2>
   </div>
-</div>
+</section>
+
+<section class="row">
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkGcC44uqDZC_3f0MWkQNBrZu3XyfqioPh8TesmKhr1dEOWJYs&s"
+    alt="bookworm"
+    class="center"
+    width="600"
+    height="600"
+  />
+</section>
 
 {{! Create list of book titles saved in bookshelf from bookshelf array }}
 <div class="bookshelf">
-  <h2>Bookshelf</h2>
   <button id="render-bs" type="submit" class="btn btn-primary">View Bookshelf</button>
   <div id="bookshelf-list"></div>
 </div>
