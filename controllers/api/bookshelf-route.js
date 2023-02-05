@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const withAuth = require("../../utils/auth");
-const { Bookshelf, Book } = require("../../models");
+const { Bookshelf } = require("../../models");
 
-// ****************** Bookshelf Routes ******************
 // route to get bookshelf by user id
 router.get("/user/:user_id", async (req, res) => {
   try {
