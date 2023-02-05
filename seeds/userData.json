@@ -10,17 +10,5 @@
     "name": "Jane Doe",
     "email": "janeDoe@test.com",
     "password": "password123"
-  },
-  {
-    "id": 3,
-    "name": "John Smith",
-    "email": "johnSmith@test.com",
-    "password": "password098"
-  },
-  {
-    "id": 4,
-    "name": "Jim",
-    "email": "jim@test.com",
-    "password": "123456"
   }
 ]
