@@ -101,4 +101,22 @@ router.get("/get-id", (req, res) => {
   }
 });
 
+// route to get a user by id
+// route: /api/user/:id
+router.get("/:id", async (req, res) => {
+  try {
+    const dbUserData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+    });
+    if (!dbUserData) {
+      res.status(404).json({ message: "No user found with this id" });
+      return;
+    }
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
