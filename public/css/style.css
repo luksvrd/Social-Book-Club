@@ -1,29 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* header,
-.book:not(:last-child) {
-  border-bottom: 1px solid rgb(155, 154, 154);
-}
-
-.no-button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #2da0d6;
-  text-decoration: none;
-  font-size: 100%;
-}
-
-.no-button:hover {
-  color: #055c85;
-  text-decoration: underline;
-}
-
-.isbn {
-  color: #056605;
-  font-weight: bold;
-  margin-left: -5px;
-} */
