@@ -32,13 +32,14 @@ const router = require("express").Router();
 // });
 
 // Add a route to get the main page
-// router.get("/", async (req, res) => {
-//   try {
-//     res.render("main");
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get("/", async (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/profile");
+    return;
+  }
+  // render the login page with the loginForm.handlebars file if the user is not logged in
+  res.render("login");
+});
 
 // // Add aroute to get all the books in the database and render the homepage
 // router.get("/", async (req, res) => {
