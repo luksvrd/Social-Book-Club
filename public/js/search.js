@@ -90,7 +90,7 @@ document
         <div class="card-body">
           <h5 class="card-title">${book.title}</h5>
           <h5 class="card-subtitle mb-2 text-muted">${book.author}</h5>
-          <p class="card-text"> ISBN: ${book.isbn}</p>
+          <p class="card-text">${book.isbn}</p>
           <button class="card-button">
           Add to Bookshelf </button>
         </div>
