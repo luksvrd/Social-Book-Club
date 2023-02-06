@@ -86,16 +86,18 @@ document
       const card = document.createElement("div");
       card.classList.add("card", "border-sm", "border-black");
       card.innerHTML = `
-        <img src="${book.cover}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">${book.title}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">${book.author}</h5>
-          <p class="card-text"> ISBN: ${book.isbn}</p>
-          <button class="card-button">
-          Add to Bookshelf </button>
-        </div>
-      `;
-
+<div class="grid grid-cols-4 gap-4 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<a href="#">
+    <img class="rounded-t-lg" src="${book.cover}" alt="" />
+</a>
+<div class="p-5">
+    <p class="card-title mb-3 font-normal text-gray-700 dark:text-gray-400">${book.title}</p>
+    <p class="card-subtitle inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">${book.author}</p>
+    <p class="card-text inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">${book.isbn}</p>
+    <button class="card-button">
+    Add to Bookshelf </button>
+</div>
+</div>`;
       // add events to the card buttons
       card
         .querySelector(".card-button")
@@ -112,3 +114,13 @@ document
     document.getElementById("book-name").value = "";
     document.getElementById("author").value = "";
   });
+
+// <img src="${book.cover}" class="card-img-top" alt="...">
+//   <div class="card-body">
+//   <h5 class="card-title">${book.title}</h5>
+//   <h5 class="card-subtitle mb-2 text-muted">${book.author}</h5>
+//   <p class="card-text"> ISBN: ${book.isbn}</p>
+//   <button class="card-button">
+//   Add to Bookshelf </button>
+// </div>
+// `;
