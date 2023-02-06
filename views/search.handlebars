@@ -1,10 +1,10 @@
-<nav>
+{{! <nav>
   <a href="/profile">profile</a>
 
-  <a href="#" id="logout">logout</a>
+  <a href="#" id="logout">Logout</a>
 
-</nav>
-<section class="row mt-4">
+</nav> }}
+{{!-- <section class="row mt-4">
   <div class="col-md-6">
     <h3>Search for Books:</h3>
     {{! Add other book search fields }}
@@ -21,11 +21,46 @@
         <button type="submit" class="btn btn-primary" id="search-btn">Find</button>
       </div>
     </form>
-  </section>
+  </section> --}}
 
-  <section class="col-md-6">
-    <h3>Results:</h3>
-    <div id="search-results"></div>
-  </section>
+<div class="grid place-items-center h-screen">
+  <div
+    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <form id="search-form">
+      <div class="mb-6">
+        <label
+          for="book-name"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Book Title:</label>
+        <input
+          type="text"
+          id="book-name"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+        />
+      </div>
+      <div class="mb-6">
+        <label
+          for="author"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Author:</label>
+        <input
+          type="text"
+          id="author"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+        />
+      </div>
+      <button
+        type="submit"
+        id="search-btn"
+        class="card-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >Find Book</button>
+    </form>
+    <section class="col-md-6">
+      <h3>Results:</h3>
+      <div id="search-results"></div>
+    </section>
+  </div>
+</div>
 
 <script type="module" src="./js/search.js"></script>

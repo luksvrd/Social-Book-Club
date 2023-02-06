@@ -7,7 +7,10 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
-  // helper called logged_in to check if a user is logged in
+
+  // Write a conditional statement to check if the user is logged in
+  // If the user is logged in, return true
+  // If the user is not logged in, return false
   loggedIn: (req) => {
     return req.session.loggedIn;
   },
