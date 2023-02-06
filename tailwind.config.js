@@ -13,7 +13,7 @@ module.exports = {
     content: [
       ".views/layout/**/*.handlebars",
       "./views/**/*.handlebars",
-      "./public/js/*.js",
+      "./public/js/**/*.js",
     ],
     defaultExtractor: (content) => {
       const matches = content.match(/[A-Za-z0-9-_:/]+/g) || [];

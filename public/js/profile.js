@@ -1,6 +1,5 @@
 import { getBookshelf, getUserId } from "./bookshelfHandler.js";
 const button = document.getElementById("render-bs");
-// If
 
 button.addEventListener("click", async () => {
   const userId = await getUserId();
@@ -21,13 +20,21 @@ button.addEventListener("click", async () => {
 
     const card = document.createElement("div");
     card.classList.add("card", "border-sm", "border-black");
-    card.innerHTML = `
-        <img src="${cover}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">${title}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">${author}</h5>
-        </div>
-      `;
+    card.innerHTML = `<div class="grid grid-cols-2 gap-4 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<a href="#">
+    <img class="p-4 rounded-t-lg" src="${cover}" alt="" />
+</a>
+<div class="p-5">
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${title}</p>
+    <p class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">${author}</p>
+</div>
+</div>`;
+    //   <img src="${cover}" class="card-img-top" alt="...">
+    //   <div class="card-body">
+    //     <h5 class="card-title">${title}</h5>
+    //     <h5 class="card-subtitle mb-2 text-muted">${author}</h5>
+    //   </div>
+    // `
     bookshelfContainer.appendChild(card);
   }
 });
