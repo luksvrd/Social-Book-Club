@@ -4,14 +4,14 @@ const { Book } = require("../../models");
 
 // add route to get all books in database
 // route: /api/books
-router.get("/", async (req, res) => {
-  try {
-    const bookData = await Book.findAll();
-    res.status(200).json(bookData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     const bookData = await Book.findAll();
+//     res.status(200).json(bookData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // add route to save a book to the database using author, title, and isbn
 // route: /api/books
