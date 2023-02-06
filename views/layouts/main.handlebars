@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -23,16 +24,16 @@
         </div>
         <div class="text-center">
           <h1>
-            <span role="img" aria-label="book">📚</span>
+            {{!-- <span role="img" aria-label="book">📚</span> --}}
             <a href="/">Welcome to Over-Booked!</a>
           </h1>
         </div>
       </nav>
-      <div>
+        <div>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9MkHUZBj2aqIcdqUh60WR-kSjeh3evHDvAop88WAMlvbbb6xu&s" alt="social_book_club" class="center" width="600" height="600" />
       </div>
     </header>
-      <main class="hidden">
+      <main>
         <div class="container container-fluid mt-5">
         <!-- Render the sub layout -->
         </div>
@@ -43,6 +44,9 @@
 
       </footer>
     </div>
+     {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
   </body>
-<script src="/public/js/login.js"></script>
+{{!-- <script src="/public/js/login.js"></script> --}}
 </html>

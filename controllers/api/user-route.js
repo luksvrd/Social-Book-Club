@@ -12,11 +12,13 @@ router.post("/signup", async (req, res) => {
       password: req.body.password,
     });
     // Save the user's id to the session and send a success message
-    req.session.userId = dbUserData.id;
-    req.session.loggedIn = true;
     req.session.save((err) => {
+      req.session.userID = dbUserData.id;
+      req.session.email = dbUserData.email;
+      req.session.loggedIn = true;
+
       if (err) {
-        console.log(err);
+        console.log("User session save error: ", err);
         res.status(500).json(err);
       } else {
         // console log the user's id

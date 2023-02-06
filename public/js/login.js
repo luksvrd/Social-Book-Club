@@ -1,6 +1,6 @@
-const loginFormHandler = async function (event) {
+const loginFormHandler = async (event) => {
   event.preventDefault();
-
+  console.log("login form was called");
   // Collect values from the login form
   const emailEl = document.querySelector("#email-login").value.trim();
   const passwordEl = document.querySelector("#password-login").value.trim();
@@ -26,3 +26,9 @@ const loginFormHandler = async function (event) {
 document
   .querySelector("#login-form")
   .addEventListener("submit", loginFormHandler);
+
+// funciton to render signup page when user clicks on the signup link
+// const signupLinkHandler = async function (event) {
+//   event.preventDefault();
+//   res.render("signup");
+// };
