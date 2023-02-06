@@ -26,9 +26,3 @@ const loginFormHandler = async (event) => {
 document
   .querySelector("#login-form")
   .addEventListener("submit", loginFormHandler);
-
-// funciton to render signup page when user clicks on the signup link
-// const signupLinkHandler = async function (event) {
-//   event.preventDefault();
-//   res.render("signup");
-// };

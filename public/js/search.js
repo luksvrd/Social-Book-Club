@@ -113,13 +113,3 @@ document
     document.getElementById("book-name").value = "";
     document.getElementById("author").value = "";
   });
-
-// <img src="${book.cover}" class="card-img-top" alt="...">
-//   <div class="card-body">
-//   <h5 class="card-title">${book.title}</h5>
-//   <h5 class="card-subtitle mb-2 text-muted">${book.author}</h5>
-//   <p class="card-text"> ISBN: ${book.isbn}</p>
-//   <button class="card-button">
-//   Add to Bookshelf </button>
-// </div>
-// `;
