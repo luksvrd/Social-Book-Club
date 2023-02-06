@@ -3,7 +3,7 @@
 This application brings together new technologies and concepts such as Node.js, Express.js, Sequelize, and Handlebars.js to create a full-stack web application that allows users to create a profile, login, make comments, and create posts. The application is a digital book club where users can collaborate and share book reviews and recommendations. In developing this application, we learned to use the MVC paradigm to organize our code, and we learned to use Handlebars.js to create dynamic HTML pages. We also learned to use Sequelize to create and manage our database, and we learned to use Express.js to create a server and handle routing. We implemented the use of packages such as bcrypt, connect-session-sequelize, dotenv, express-handlebars, express-session, and mysql2 to help us create a secure and functional application.
 
 Repository: https://github.com/luksvrd/Social-Book-Club
-![Over-Booked](https://github.com/luksvrd/MVCTechBlog/blob/main/techblog.png)
+![Over-Booked](https://github.com/luksvrd/Social-Book-Club/blob/main/OverBooked.jpg)
 
 ## Table of Contents
 
