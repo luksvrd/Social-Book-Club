@@ -36,8 +36,9 @@ async function deleteBook() {
   });
   const bookshelfData = await response.json();
 
-  // remove the book from the bookshelf list
-  this.parentElement.remove();
+  // get the full card and remove it from the page
+  const card = this.parentElement.parentElement.parentElement;
+  card.remove();
 }
 
 button.addEventListener("click", async () => {
