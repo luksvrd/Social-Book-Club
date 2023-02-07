@@ -49,7 +49,7 @@ export async function getBookshelf(userId) {
   // get bookshelf_content from the bookshelf object
   const bookshelfContent = bookshelfObj.bookshelf_content;
   // if the bookshelf length is 0, set it to an empty array
-  if (bookshelfContent.length === 0) {
+  if (bookshelfContent === undefined) {
     const bookIds = [];
     return bookIds;
   } else {
